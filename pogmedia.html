@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Videos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Keyframe animation for the POG image */
+        @keyframes pogAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        body {
+            /* Replace with your AI image URL */
+            background-image: url('https://placehold.co/1920x1080/EEE/31343C?text=Chick&font=Montserrat');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Ensure the background doesn't interfere with text readability */
+            background-blend-mode: overlay;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-gradient-to-r from-red-500 to-pink-500 text-white py-6 text-center shadow-md rounded-b-lg">
+        <h1 class="text-3xl font-bold mb-2">Share Your Videos</h1>
+        <p class="text-lg">Upload and share your favorite videos with friends!</p>
+        <div class="flex justify-center mt-4">
+            <img id="pog-image" src="https://placehold.co/150x100/EEE/31343C?text=Pog+Media&font=Montserrat" alt="Pog Media" class="rounded-lg shadow-md animate-pog" style="animation: pogAnimation 2s infinite;">
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8 p-4">
+        <div id="video-upload-form" class="bg-white shadow-lg rounded-lg p-6 mb-8 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
+            <h2 class="text-2xl font-semibold mb-6 text-blue-600 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-cloud mr-2 text-blue-500">
+                    <path d="M16 16v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v5"></path>
+                    <path d="M8 10l4-4 4 4"></path>
+                    <path d="M8 17H16"></path>
+                    <path d="M20 15v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                </svg>
+                Upload Your Video
+            </h2>
+            <div class="mb-4">
+                <label for="gmail" class="block text-gray-700 text-sm font-bold mb-2">Your Gmail:</label>
+                <input type="email" id="gmail" placeholder="Enter your Gmail" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+            </div>
+            <div class="mb-4">
+                <label for="video-file" class="block text-gray-700 text-sm font-bold mb-2">Select Video File:</label>
+                <input type="file" id="video-file" accept="video/*" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+            </div>
+            <div class="mb-4">
+                <label for="video-title" class="block text-gray-700 text-sm font-bold mb-2">Video Title:</label>
+                <input type="text" id="video-title" placeholder="Enter video title" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+            </div>
+            <button id="upload-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-cloud mr-2">
+                    <path d="M16 16v-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v5"></path>
+                    <path d="M8 10l4-4 4 4"></path>
+                    <path d="M8 17H16"></path>
+                    <path d="M20 15v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                </svg>
+                Upload Video
+            </button>
+            <div id="upload-status" class="mt-6 text-yellow-600 font-semibold text-center transition-all duration-300"></div>
+        </div>
+
+        <div id="video-display-area" class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-6 text-purple-600 flex items-center">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video-clapperboard mr-2 text-purple-500">
+                    <path d="M9 7v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                    <path d="M2 17v-4c0-1.333-.8-4-6-4"></path>
+                    <path d="M22 17v-4c0-1.333.8-4 6-4"></path>
+                    <path d="M14 15h-4"></path>
+                    <path d="M12 11v4"></path>
+                    <path d="M2 8h20"></path>
+                    <path d="M7 21h2"></path>
+                    <path d="M15 21h2"></path>
+                </svg>
+                Available Videos
+            </h2>
+            <div id="videos-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+             <div id="no-videos-message" class="text-gray-500 text-center mt-4">No videos have been uploaded yet.</div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4 text-center mt-12 rounded-t-lg shadow-md">
+        <p>© 2024 Video Sharing Website. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const gmailInput = document.getElementById('gmail');
+        const videoFile = document.getElementById('video-file');
+        const uploadButton = document.getElementById('upload-button');
+        const uploadStatus = document.getElementById('upload-status');
+        const videosContainer = document.getElementById('videos-container');
+        const videoTitleInput = document.getElementById('video-title');
+        const noVideosMessage = document.getElementById('no-videos-message');
+
+
+        // In-memory storage for uploaded videos (replace with server-side storage in a real application)
+        let uploadedVideos = [];
+
+        // Function to display a video
+        function displayVideo(gmail, videoTitle, videoURL) {
+            noVideosMessage.style.display = 'none'; // Hide the message when a video is added
+            const videoCard = document.createElement('div');
+            videoCard.classList.add('rounded-lg', 'overflow-hidden', 'shadow-md', 'bg-gray-800', 'transition-transform', 'duration-300', 'hover:scale-105');
+
+            const videoElement = document.createElement('video');
+            videoElement.src = videoURL;
+            videoElement.controls = true;
+            videoElement.classList.add('w-full', 'rounded-t-lg');
+            videoElement.style.maxHeight = '200px'; // Limit video height for better layout
+            videoElement.style.objectFit = 'cover';
+             videoElement.addEventListener('mouseenter', () => {
+                videoElement.play();
+            });
+            videoElement.addEventListener('mouseleave', () => {
+                videoElement.pause();
+            });
+
+            const videoInfo = document.createElement('div');
+            videoInfo.classList.add('p-4');
+
+            const titleElement = document.createElement('h3');
+            titleElement.textContent = videoTitle;
+            titleElement.classList.add('text-lg', 'font-semibold', 'text-white', 'mb-2');
+            titleElement.style.display = '-webkit-box';
+            titleElement.style.webkitLineClamp = '2';
+            titleElement.style.webkitBoxOrient = 'vertical';
+            titleElement.style.overflow = 'hidden';
+
+            const gmailElement = document.createElement('p');
+            gmailElement.textContent = `Uploaded by: ${gmail}`;
+            gmailElement.classList.add('text-gray-300', 'text-sm');
+
+            videoInfo.appendChild(titleElement);
+            videoInfo.appendChild(gmailElement);
+
+            videoCard.appendChild(videoElement);
+            videoCard.appendChild(videoInfo);
+            videosContainer.appendChild(videoCard);
+        }
+
+        // Eve" code between  and  in the most up-to-date Canvas "Interactive Video Upload Website" document above and am asking a query about/based on this code below.
+Instructions to follow:
+  * Don't output/edit the document if the query is Direct/Simple. For example, if the query asks for a simple explanation, output a direct answer.
+  * Make sure to **edit** the document if the query shows the intent of editing the document, in which case output the entire edited document, **not just that section or the edits**.
+    * Don't output the same document/empty document and say that you have edited it.
+    * Don't change unrelated code in the document.
+  * Don't output  and  in your final response.
+  * Any references like "this" or "selected code" refers to the code between  and  tags.
+  * Just acknowledge my request in the introduction.
+  * Make sure to refer to the document as "Canvas" in your response.
+
+add an ai image of a chick to the center of the scr
